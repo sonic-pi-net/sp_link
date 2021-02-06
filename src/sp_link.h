@@ -31,7 +31,7 @@ extern "C" {
 
     DllExport int sp_link_is_enabled(bool* enabled);
 
-    DllExport int sp_link_set_tempo(double bpm, long long micros);
+    DllExport int sp_link_set_tempo(double bpm, ErlNifSInt64 micros);
 
     DllExport int sp_link_get_tempo(double* bpm);
 
@@ -41,25 +41,25 @@ extern "C" {
 
     DllExport int sp_link_start_stop_sync_enable(bool enable);
 
-    DllExport int sp_link_set_is_playing(bool is_playing, long long micros);
+    DllExport int sp_link_set_is_playing(bool is_playing, ErlNifSInt64 micros);
 
     DllExport int sp_link_is_playing(bool* is_playing);
 
-    DllExport int sp_link_get_time_for_is_playing(long long* micros);
+    DllExport int sp_link_get_time_for_is_playing(ErlNifSInt64* micros);
 
-    DllExport int sp_link_get_beat_at_time(long long micros, double quantum, double* beat);
+    DllExport int sp_link_get_beat_at_time(ErlNifSInt64 micros, double quantum, double* beat);
 
-    DllExport int sp_link_get_phase_at_time(long long micros, double quantum, double* phase);
+    DllExport int sp_link_get_phase_at_time(ErlNifSInt64 micros, double quantum, double* phase);
 
-    DllExport int sp_link_get_time_at_beat(double beat, double quantum, long long* micros);
+    DllExport int sp_link_get_time_at_beat(double beat, double quantum, ErlNifSInt64* micros);
 
-    DllExport int sp_link_request_beat_at_time(double beat, long long micros, double quantum);
+    DllExport int sp_link_request_beat_at_time(double beat, ErlNifSInt64 micros, double quantum);
 
-    DllExport int sp_link_force_beat_at_time(double beat, long long micros, double quantum);
+    DllExport int sp_link_force_beat_at_time(double beat, ErlNifSInt64 micros, double quantum);
 
-    DllExport int sp_link_set_is_playing_and_request_beat_at_time(bool is_playing, long long micros, double beat, double quantum);
+    DllExport int sp_link_set_is_playing_and_request_beat_at_time(bool is_playing, ErlNifSInt64 micros, double beat, double quantum);
 
-    DllExport int sp_link_get_current_time_microseconds(long long* micros);
+    DllExport int sp_link_get_current_time_microseconds(ErlNifSInt64* micros);
 
 
     /************** Functions for the erlang integration below ***************/

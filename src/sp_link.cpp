@@ -158,7 +158,6 @@ int sp_link_is_enabled(bool* enabled)
 }
 
 
-// FIXME: use micros properly. Pass it to the setTempo method.
 int sp_link_set_tempo(double bpm, ErlNifSInt64 micros)
 {
     if (!g_initialized){
@@ -166,7 +165,7 @@ int sp_link_set_tempo(double bpm, ErlNifSInt64 micros)
     }
 
     auto state = g_link->captureAppSessionState();
-    state.setTempo(bpm, std::chrono::microseconds(0));
+    state.setTempo(bpm, std::chrono::microseconds(micros));
     g_link->commitAppSessionState(state);
     return 0;
 }
@@ -191,7 +190,7 @@ int sp_link_set_is_playing(bool is_playing, ErlNifSInt64 micros)
     }
 
     auto state = g_link->captureAppSessionState();
-    state.setIsPlaying(is_playing, std::chrono::microseconds(0));
+    state.setIsPlaying(is_playing, std::chrono::microseconds(micros));
     g_link->commitAppSessionState(state);
     return 0;
 }
