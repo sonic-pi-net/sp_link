@@ -159,7 +159,7 @@ int sp_link_is_enabled(bool* enabled)
 
 
 // FIXME: use micros properly. Pass it to the setTempo method.
-int sp_link_set_tempo(double bpm, long long micros)
+int sp_link_set_tempo(double bpm, ErlNifSInt64 micros)
 {
     if (!g_initialized){
         return -1;
@@ -184,7 +184,7 @@ int sp_link_get_tempo(double* bpm)
 }
 
 
-int sp_link_set_is_playing(bool is_playing, long long micros)
+int sp_link_set_is_playing(bool is_playing, ErlNifSInt64 micros)
 {
     if (!g_initialized){
         return -1;
@@ -209,7 +209,7 @@ int sp_link_is_playing(bool* is_playing)
 }
 
 
-int sp_link_get_time_for_is_playing(long long* micros)
+int sp_link_get_time_for_is_playing(ErlNifSInt64* micros)
 {
     if (!g_initialized){
         return -1;
@@ -254,7 +254,7 @@ int sp_link_is_start_stop_sync_enabled(bool* enabled)
 }
 
 
-int sp_link_get_beat_at_time(long long micros, double quantum, double* beat)
+int sp_link_get_beat_at_time(ErlNifSInt64 micros, double quantum, double* beat)
 {
     if (!g_initialized){
         return -1;
@@ -266,7 +266,7 @@ int sp_link_get_beat_at_time(long long micros, double quantum, double* beat)
 }
 
 
-int sp_link_get_phase_at_time(long long micros, double quantum, double* beat)
+int sp_link_get_phase_at_time(ErlNifSInt64 micros, double quantum, double* beat)
 {
     if (!g_initialized){
         return -1;
@@ -278,7 +278,7 @@ int sp_link_get_phase_at_time(long long micros, double quantum, double* beat)
 }
 
 
-int sp_link_get_time_at_beat(double beat, double quantum, long long* micros)
+int sp_link_get_time_at_beat(double beat, double quantum, ErlNifSInt64* micros)
 {
     if (!g_initialized){
         return -1;
@@ -290,7 +290,7 @@ int sp_link_get_time_at_beat(double beat, double quantum, long long* micros)
 }
 
 
-int sp_link_request_beat_at_time(double beat, long long micros, double quantum)
+int sp_link_request_beat_at_time(double beat, ErlNifSInt64 micros, double quantum)
 {
     if (!g_initialized){
         return -1;
@@ -303,7 +303,7 @@ int sp_link_request_beat_at_time(double beat, long long micros, double quantum)
 }
 
 
-int sp_link_force_beat_at_time(double beat, long long micros, double quantum)
+int sp_link_force_beat_at_time(double beat, ErlNifSInt64 micros, double quantum)
 {
     if (!g_initialized){
         return -1;
@@ -329,7 +329,7 @@ int sp_link_request_beat_at_start_playing_time(double beat, double quantum)
 }
 
 
-int sp_link_set_is_playing_and_request_beat_at_time(bool is_playing, long long micros, double beat, double quantum)
+int sp_link_set_is_playing_and_request_beat_at_time(bool is_playing, ErlNifSInt64 micros, double beat, double quantum)
 {
     if (!g_initialized){
         return -1;
@@ -343,7 +343,7 @@ int sp_link_set_is_playing_and_request_beat_at_time(bool is_playing, long long m
 
 
 // TODO: Keep in mind that different C++ clocks might have different values. Make sure that this is consistent with other clocks (need to test)
-int sp_link_get_current_time_microseconds(long long* micros)
+int sp_link_get_current_time_microseconds(ErlNifSInt64* micros)
 {
     if (!g_initialized){
         return -1;
@@ -406,7 +406,7 @@ ERL_NIF_TERM sp_link_is_enabled_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM
 ERL_NIF_TERM sp_link_set_tempo_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     double bpm;
-    long long micros;
+    ErlNifSInt64 micros;
     int rc = enif_get_double(env, argv[0], &bpm);
     if (!rc){
         return enif_make_badarg(env);
@@ -436,7 +436,7 @@ ERL_NIF_TERM sp_link_get_tempo_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM 
 ERL_NIF_TERM sp_link_set_is_playing_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     char atom[256];
-    long long micros;
+    ErlNifSInt64 micros;
     int rc = enif_get_atom(env, argv[0], atom, 256, ERL_NIF_LATIN1);
     if (!rc){
         return enif_make_badarg(env);
@@ -469,7 +469,7 @@ ERL_NIF_TERM sp_link_is_playing_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM
 
 ERL_NIF_TERM sp_link_get_time_for_is_playing_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
-    long long micros;
+    ErlNifSInt64 micros;
     int rc = sp_link_get_time_for_is_playing(&micros);
     if (rc < 0){
         return enif_make_atom(env, "error");
@@ -518,7 +518,7 @@ ERL_NIF_TERM sp_link_is_start_stop_sync_enabled_nif(ErlNifEnv* env, int argc, co
 
 ERL_NIF_TERM sp_link_get_beat_at_time_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
-    long long micros;
+    ErlNifSInt64 micros;
     double quantum;
     int rc = enif_get_int64(env, argv[0], &micros);
     if (!rc){
@@ -543,7 +543,7 @@ ERL_NIF_TERM sp_link_get_beat_at_time_nif(ErlNifEnv* env, int argc, const ERL_NI
 
 ERL_NIF_TERM sp_link_get_phase_at_time_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
-    long long micros;
+    ErlNifSInt64 micros;
     double quantum;
     int rc = enif_get_int64(env, argv[0], &micros);
     if (!rc){
@@ -580,7 +580,7 @@ ERL_NIF_TERM sp_link_get_time_at_beat_nif(ErlNifEnv* env, int argc, const ERL_NI
         return enif_make_badarg(env);
     }
 
-    long long micros;
+    ErlNifSInt64 micros;
     rc = sp_link_get_time_at_beat(beat, quantum, &micros);
     if (rc == 0){
         return enif_make_int64(env, micros);
@@ -595,7 +595,7 @@ ERL_NIF_TERM sp_link_get_time_at_beat_nif(ErlNifEnv* env, int argc, const ERL_NI
 ERL_NIF_TERM sp_link_request_beat_at_time_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     double beat;
-    long long micros;
+    ErlNifSInt64 micros;
     double quantum;
     int rc = enif_get_double(env, argv[0], &beat);
     if (!rc){
@@ -620,7 +620,7 @@ ERL_NIF_TERM sp_link_request_beat_at_time_nif(ErlNifEnv* env, int argc, const ER
 ERL_NIF_TERM sp_link_force_beat_at_time_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
     double beat;
-    long long micros;
+    ErlNifSInt64 micros;
     double quantum;
     int rc = enif_get_double(env, argv[0], &beat);
     if (!rc){
@@ -665,7 +665,7 @@ ERL_NIF_TERM sp_link_set_is_playing_and_request_beat_at_time_nif(ErlNifEnv* env,
 {
     char atom[256];
     bool is_playing = false;
-    long long micros;
+    ErlNifSInt64 micros;
     double beat;
     double quantum;
     int rc = enif_get_atom(env, argv[0], atom, 256, ERL_NIF_LATIN1);
@@ -725,7 +725,7 @@ ERL_NIF_TERM sp_link_set_log_level_nif(ErlNifEnv* env, int argc, const ERL_NIF_T
 
 ERL_NIF_TERM sp_link_get_current_time_microseconds_nif(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
-    long long micros;
+    ErlNifSInt64 micros;
     int rc = sp_link_get_current_time_microseconds(&micros);
     if (rc == 0){
         return enif_make_int64(env, micros);
