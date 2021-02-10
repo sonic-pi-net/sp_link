@@ -77,7 +77,7 @@ int send_to_erlang_start_stop(bool is_playing)
     ERL_NIF_TERM term2;
     ERL_NIF_TERM tuple;
 
-    term1 = enif_make_atom(msg_env, "cb_num_peers");
+    term1 = enif_make_atom(msg_env, "cb_start_stop");
     term2 = enif_make_atom(msg_env, is_playing ? "true" : "false");
     tuple = enif_make_tuple2(msg_env, term1, term2);
     int rc = enif_send(NULL, &g_link_erlang_callback_pid, msg_env, tuple);

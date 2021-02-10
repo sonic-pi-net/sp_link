@@ -7,7 +7,8 @@ int main()
     sp_link_init(120);
     printf("Waiting for keypress and then enabling link\n");
     getchar();
-    sp_link_enable(1);    printf("Waiting for keypress and then getting number of peers\n");
+    sp_link_enable(1);
+    printf("Waiting for keypress and then getting number of peers\n");
     getchar();
     int num_peers;
     sp_link_get_num_peers(&num_peers);
