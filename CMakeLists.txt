@@ -40,6 +40,8 @@ endif()
 
 set(sp_link_sources
     src/sp_link.cpp
+    src/sp_link_nifs.cpp
+    src/sp_link_nif_callbacks.cpp
 )
 
 # sp_link_sources
