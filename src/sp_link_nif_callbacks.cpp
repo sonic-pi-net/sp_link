@@ -45,7 +45,7 @@ int send_to_erlang_num_peers(int num_peers)
     ERL_NIF_TERM term2;
     ERL_NIF_TERM tuple;
 
-    term1 = enif_make_atom(msg_env, "cb_num_peers");
+    term1 = enif_make_atom(msg_env, "link_num_peers");
     term2 = enif_make_int(msg_env, num_peers);
     tuple = enif_make_tuple2(msg_env, term1, term2);
     int rc = enif_send(NULL, &g_link_erlang_callback_pid, msg_env, tuple);
@@ -60,7 +60,7 @@ int send_to_erlang_tempo(double bpm)
     ERL_NIF_TERM term2;
     ERL_NIF_TERM tuple;
 
-    term1 = enif_make_atom(msg_env, "cb_tempo");
+    term1 = enif_make_atom(msg_env, "link_tempo");
     term2 = enif_make_double(msg_env, bpm);
     tuple = enif_make_tuple2(msg_env, term1, term2);
     int rc = enif_send(NULL, &g_link_erlang_callback_pid, msg_env, tuple);
@@ -72,12 +72,10 @@ int send_to_erlang_start_stop(bool is_playing)
 {
     ErlNifEnv* msg_env = enif_alloc_env();
     ERL_NIF_TERM term1;
-    ERL_NIF_TERM term2;
     ERL_NIF_TERM tuple;
 
-    term1 = enif_make_atom(msg_env, "cb_start_stop");
-    term2 = enif_make_atom(msg_env, is_playing ? "true" : "false");
-    tuple = enif_make_tuple2(msg_env, term1, term2);
+    term1 = enif_make_atom(msg_env, is_playing ? "link_start" : "link_stop");
+    tuple = enif_make_tuple1(msg_env, term1);
     int rc = enif_send(NULL, &g_link_erlang_callback_pid, msg_env, tuple);
     enif_free_env(msg_env);
     return rc;

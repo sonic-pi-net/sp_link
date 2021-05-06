@@ -1,9 +1,9 @@
 -module(sp_link).
--export([link_init/1, link_deinit/0, link_enable/1, link_is_enabled/0, link_set_tempo/2, link_get_tempo/0, link_get_num_peers/0,
-    link_start_stop_sync_enable/1, link_is_start_stop_sync_enabled/0, link_set_is_playing/2, link_is_playing/0, link_get_time_for_is_playing/0,
-    link_get_beat_at_time/2, link_get_phase_at_time/2, link_get_time_at_beat/2, link_request_beat_at_time/3, link_force_beat_at_time/3,
-    link_request_beat_at_start_playing_time/2, link_set_is_playing_and_request_beat_at_time/4, link_set_link_callback_pid/1,
-    link_get_current_time_microseconds/0, set_log_level/1]).
+-export([init_nif/1, deinit_nif/0, enable/1, is_enabled/0, set_tempo/2, get_tempo/0, get_num_peers/0,
+    start_stop_sync_enable/1, is_start_stop_sync_enabled/0, set_is_playing/2, is_playing/0, get_time_for_is_playing/0,
+    get_beat_at_time/2, get_phase_at_time/2, get_time_at_beat/2, request_beat_at_time/3, force_beat_at_time/3,
+    request_beat_at_start_playing_time/2, set_is_playing_and_request_beat_at_time/4, set_callback_pid/1,
+    get_current_time_microseconds/0, set_log_level/1]).
 -on_load(init/0).
 
 init() ->
@@ -14,47 +14,47 @@ init() ->
         ok = erlang:load_nif("/home/luis/projects/sp_link/build/libsp_link", 0)
     end.
 
-link_init(_) ->
+init_nif(_) ->
     exit(nif_library_not_loaded).
-link_deinit() ->
+deinit_nif() ->
     exit(nif_library_not_loaded).
-link_enable(_) ->
+enable(_) ->
     exit(nif_library_not_loaded).
-link_is_enabled() ->
+is_enabled() ->
     exit(nif_library_not_loaded).
-link_set_tempo(_, _) ->
+set_tempo(_, _) ->
     exit(nif_library_not_loaded).
-link_get_tempo() ->
+get_tempo() ->
     exit(nif_library_not_loaded).
-link_get_num_peers() ->
+get_num_peers() ->
     exit(nif_library_not_loaded).
-link_start_stop_sync_enable(_) ->
+start_stop_sync_enable(_) ->
     exit(nif_library_not_loaded).
-link_is_start_stop_sync_enabled() ->
+is_start_stop_sync_enabled() ->
     exit(nif_library_not_loaded).
-link_set_is_playing(_, _) ->
+set_is_playing(_, _) ->
     exit(nif_library_not_loaded).
-link_is_playing() ->
+is_playing() ->
     exit(nif_library_not_loaded).
-link_get_time_for_is_playing() ->
+get_time_for_is_playing() ->
     exit(nif_library_not_loaded).
-link_get_beat_at_time(_, _) ->
+get_beat_at_time(_, _) ->
     exit(nif_library_not_loaded).
-link_get_phase_at_time(_, _) ->
+get_phase_at_time(_, _) ->
     exit(nif_library_not_loaded).
-link_get_time_at_beat(_, _) ->
+get_time_at_beat(_, _) ->
     exit(nif_library_not_loaded).
-link_request_beat_at_time(_, _, _) ->
+request_beat_at_time(_, _, _) ->
     exit(nif_library_not_loaded).
-link_force_beat_at_time(_, _, _) ->
+force_beat_at_time(_, _, _) ->
     exit(nif_library_not_loaded).
-link_request_beat_at_start_playing_time(_, _) ->
+request_beat_at_start_playing_time(_, _) ->
     exit(nif_library_not_loaded).
-link_set_is_playing_and_request_beat_at_time(_, _, _, _) ->
+set_is_playing_and_request_beat_at_time(_, _, _, _) ->
     exit(nif_library_not_loaded).
-link_set_link_callback_pid(_) ->
+set_callback_pid(_) ->
     exit(nif_library_not_loaded).
-link_get_current_time_microseconds() ->
+get_current_time_microseconds() ->
     exit(nif_library_not_loaded).
 set_log_level(_) ->
     exit(nif_library_not_loaded).

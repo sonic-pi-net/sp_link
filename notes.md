@@ -11,37 +11,38 @@ Session State is a class that contains:
 
 
 The API is:
-- link_enable
-- link_is_enabled
+- `enable`
+- `is_enabled`
 
-- link_get_tempo
-- link_set_tempo
+- `get_tempo`
+- `set_tempo`
 
-- link_get_num_peers
+- `get_num_peers`
 
-- link_get_beat_at_time
-- link_get_phase_at_time
-- link_get_time_at_beat
-- link_request_beat_at_time
-- link_force_beat_at_time
+- `get_beat_at_time`
+- `get_phase_at_time`
+- `get_time_at_beat`
+- `request_beat_at_time`
+- `force_beat_at_time`
 
-- link_set_is_playing
-- link_get_is_playing
-- link_get_time_for_is_playing
+- `set_is_playing`
+- `get_is_playing`
+- `get_time_for_is_playing`
 
-- link_is_start_stop_sync_enabled
-- link_start_stop_sync_enable
+- `is_start_stop_sync_enabled`
+- `start_stop_sync_enable`
 
-- link_request_beat_at_start_playing_time
-- link_set_is_playing_and_request_beat_at_time
+- `request_beat_at_start_playing_time`
+- `set_is_playing_and_request_beat_at_time`
 
-- link_get_current_time_microseconds: an aux function to get current time in microseconds. See _clock()_ method in Link. See __sp_link_get_current_time_microseconds__
+- `get_current_time_microseconds` : an aux function to get current time in microseconds. See _clock()_ method in Link. See __sp_get_current_time_microseconds__
+- `set_callback_pid`: a function to register a callback for the Link callbacks. See __sp_set_callback_pid_nif__
 
-- link_set_link_callback_pid: a function to register a callback for the Link callbacks. See __sp_link_set_link_callback_pid_nif__
-The callbacks are:
-- setNumPeersCallback
-- setTempoCallback
-- setStartStopCallback
+The callbacks send the following tuples to the callback pid:
+- `{link_num_peers, NumPeers}`
+- `{link_tempo, Tempo}`
+- `{link_stop}`
+- `{link_start}`
 
 Need C99 compliant compiler, since I am using C bools, that should not be an issue in this day and age, but keep an eye
 
