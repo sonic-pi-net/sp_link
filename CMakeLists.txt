@@ -1,5 +1,5 @@
+cmake_minimum_required (VERSION 3.13)
 project (sp_link)
-cmake_minimum_required (VERSION 3.0)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
